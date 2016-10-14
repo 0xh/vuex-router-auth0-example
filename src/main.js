@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import dashboard from './components/Dashboard'
+import login from './components/LoginCallback'
 import store from './store'
 
 Vue.use(VueRouter)
@@ -25,14 +26,10 @@ const routes = [
   },
   {
     path: '/login/callback',
-    component: Vue.extend({
-      name: 'LoginCallback',
-      route: {
-        activate(){
-          console.log('... ready .. ')
-        }
-      }
-    })
+    redirect (router) {
+      debugger
+      store.dispatch('login', router.query.jwt)
+    }
   }
 ]
 const router = new VueRouter({
