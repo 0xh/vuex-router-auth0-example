@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import dashboard from './components/Dashboard'
-import login from './components/Login'
 import store from './store'
 
 Vue.use(VueRouter)
@@ -12,10 +11,7 @@ Vue.use(VueRouter)
 //  - http://stackoverflow.com/questions/39940665/passing-vuex-module-state-into-vue-router-during-beforeeach
 function requireAuth (to, from, next) {
   if (!store.getters.isAuthenticated) {
-    next({
-      path: '/login',
-      query: { redirect: to.fullPath }
-    })
+    window.location.href = '/auth/v1/auth0/connect'
   } else {
     next()
   }
@@ -28,16 +24,20 @@ const routes = [
     beforeEnter: requireAuth
   },
   {
-    path: '/login',
-    component: login,
-    beforeEnter (to, from, next) {
-      store.commit('LOGOUT')
-      next()
-    }
+    path: '/login/callback',
+    component: Vue.extend({
+      name: 'LoginCallback',
+      route: {
+        activate(){
+          console.log('... ready .. ')
+        }
+      }
+    })
   }
 ]
 const router = new VueRouter({
   routes,
+  mode: 'history',
   base: __dirname
 })
 
