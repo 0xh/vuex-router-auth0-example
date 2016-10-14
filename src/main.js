@@ -7,12 +7,38 @@ import store from './store'
 
 Vue.use(VueRouter)
 
+// FROM:
+//  - https://github.com/vuejs/vue-router/blob/c4f9836aa9676e2574f98ecb7bc76f7d2f628c63/examples/auth-flow/app.js
+//  - http://stackoverflow.com/questions/39940665/passing-vuex-module-state-into-vue-router-during-beforeeach
+function requireAuth (to, from, next) {
+  if (!store.getters.isAuthenticated) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
+}
+
 const routes = [
-  { path: '/dashboard', component: dashboard },
-  { path: '/login', component: login }
+  {
+    path: '/dashboard',
+    component: dashboard,
+    beforeEnter: requireAuth
+  },
+  {
+    path: '/login',
+    component: login,
+    beforeEnter (to, from, next) {
+      store.commit('LOGOUT')
+      next()
+    }
+  }
 ]
 const router = new VueRouter({
-  routes
+  routes,
+  base: __dirname
 })
 
 new Vue({

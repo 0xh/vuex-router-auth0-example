@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>In Dashboard</h2>
+    <span>{{ userName }}</span>
     <span>{{ count }}</span>
     <button @click=increment()>Increment this!</button>
   </div>
@@ -21,7 +22,8 @@
     },
     computed: {
       ...mapState({
-        count: state => state.count
+        count: state => state.count,
+        userName: state => state.auth.userInfo.userName
       })
     }
   }
