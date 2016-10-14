@@ -11,8 +11,10 @@ import { mapActions } from 'vuex'
       ...mapActions(['login'])
     },
     mounted(){
-      console.log('JWT: ', this.$route.query.jwt)
-      this.login(this.$route.query.jwt)
+      let self = this
+      this.login(this.$route.query.jwt).then( () => {
+        self.$router.push('/dashboard')
+      })
     }
   }
 </script>

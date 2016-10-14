@@ -1,42 +1,40 @@
 import axios from 'axios'
 
 const state = {
-  auth: null
+  userInfo: null
 }
 
 const mutations = {
   LOGIN (state, data) {
-    state.auth = data.auth
-    console.log('Action auth LOGIN')
+    state.userInfo = data
   },
   LOGOUT (state) {
-    console.log('Action auth LOGOUT')
-    state.auth = null
+    state.userInfo = null
   }
 }
 
 const actions = {
   logout ({ commit }) {
     delete localStorage.token
-    axios.defaults.headers.post[ 'x-stamplay-jwt' ] = undefined
-    delete axios.defaults.headers.post[ 'x-stamplay-jwt' ]
+    axios.defaults.headers.common[ 'x-stamplay-jwt' ] = undefined
+    delete axios.defaults.headers.common[ 'x-stamplay-jwt' ]
     commit('LOGOUT')
   },
   login ({ commit }, token) {
-    debugger
     localStorage.token = token
-    axios.defaults.headers.post[ 'x-stamplay-jwt' ] = token
-    return axios.get('/api/user/v1/getstatus').then(resp => {
-      debugger
-      commit('LOGIN', token)
-    })
+    axios.defaults.headers.common[ 'x-stamplay-jwt' ] = token
+    return axios
+      .get('/api/user/v1/getstatus')
+      .then(resp => {
+        commit('LOGIN', resp.data.user)
+        return resp.data.user
+      })
   }
-
 }
 
 const getters = {
   isAuthenticated: state => {
-    return state.auth
+    return !!state.userInfo
   }
 }
 

@@ -26,10 +26,14 @@ const routes = [
   },
   {
     path: '/login/callback',
-    redirect (router) {
+    component: login
+    /*redirect (router) {
       debugger
-      store.dispatch('login', router.query.jwt)
-    }
+      store.dispatch('login', router.query.jwt).then( (resp) => {
+        debugger
+        return '/dashboard'
+      })
+    }*/
   }
 ]
 const router = new VueRouter({
