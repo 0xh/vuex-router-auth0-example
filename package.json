@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "stamplay": "stamplay start",
+    "build": "node build/build.js",
+    "deploy": "npm run build && stamplay deploy"
   },
   "dependencies": {
     "axios": "^0.15.0",
@@ -37,6 +39,7 @@
     "opn": "^4.0.2",
     "ora": "^0.3.0",
     "shelljs": "^0.7.4",
+    "stamplay": "^1.0.8",
     "url-loader": "^0.5.7",
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
