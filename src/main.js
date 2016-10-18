@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
@@ -27,13 +28,6 @@ const routes = [
   {
     path: '/login/callback',
     component: login
-    /*redirect (router) {
-      debugger
-      store.dispatch('login', router.query.jwt).then( (resp) => {
-        debugger
-        return '/dashboard'
-      })
-    }*/
   }
 ]
 const router = new VueRouter({

@@ -1,23 +1,33 @@
 <template>
   <div>
-    <h2>In Dashboard</h2>
+    <h2>Hi {{ userName }}
+      <img width="80" :src="profileImg">
+    </h2>
     <button @click=logoutAndRedirect()>Logout</button>
-    <span>{{ count }}</span>
-    <button @click=increment()>Increment this!</button>
-    <span>{{ userName }}</span>
-    <img :src="profileImg">
+    <hr>
+
+    <event-form></event-form>
+    <hr>
+    <ul >
+      <li v-for="event in getEvents">
+        <event :data=event></event>
+      </li>
+    </ul>
+
   </div>
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex'
+  import event from './Event'
+  import eventForm from './EventForm'
+  import { mapActions, mapState, mapGetters } from 'vuex'
 
   export default{
-    data(){
-      return {}
+    mounted () {
+      this.fetchEvens()
     },
     methods: {
-      ...mapActions([ 'increment', 'logout' ]),
+      ...mapActions([ 'logout', 'fetchEvens' ]),
       logoutAndRedirect () {
         let self = this
         this.logout().then(resp => {
@@ -26,11 +36,12 @@
       }
     },
     computed: {
+      ...mapGetters(['getEvents']),
       ...mapState({
-        count: state => state.count,
         userName: state => state.auth.userInfo.displayName,
         profileImg: state => state.auth.userInfo.profileImg
       })
-    }
+    },
+    components: { event, eventForm }
   }
 </script>
