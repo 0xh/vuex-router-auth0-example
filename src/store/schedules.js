@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-var events = axios.create({
-  baseURL: '/api/cobject/v1/events'
+var schedules = axios.create({
+  baseURL: '/api/cobject/v1/schedules'
 });
 
 const state = {
@@ -9,31 +9,32 @@ const state = {
 }
 
 const mutations = {
-  SET_EVENTS (state, payload) {
+  SET_SCHEDULES (state, payload) {
     state.all = payload.data
   },
-  ADD_EVENT (state, payload) {
+  ADD_SCHEDULE (state, payload) {
     state.all.push(payload)
   }
 }
 
 const actions = {
-  fetchEvens ({ commit }) {
-    return events.get('')
+  fetchSchedules ({ commit }) {
+    return schedules.get('')
       .then(resp => resp.data)
       .then(events => commit('SET_EVENTS', events))
   },
-  saveEvent({ commit }, payload) {
-    return events.post('', payload)
+  saveSchedule({ commit }, payload) {
+    return schedules.post('', payload)
       .then(res => res.data)
-      .then(event => {
-        commit('ADD_EVENT', event)
-        return event
+      .then(schedule => {
+        commit('ADD_SCHEDULE', schedule)
+        return schedule
       })
   }
 }
 
 const getters = {
+
 }
 
 export default {

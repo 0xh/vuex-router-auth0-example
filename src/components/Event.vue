@@ -1,11 +1,9 @@
 <template>
   <div>
     <span>{{ data.title }}</span>
+    <pre>{{ data.scheduleIds | json }}</pre>
   </div>
 </template>
-
-<style>
-</style>
 
 <script>
   export default{

@@ -9,7 +9,7 @@
     <event-form></event-form>
     <hr>
     <ul >
-      <li v-for="event in getEvents">
+      <li v-for="event in events">
         <event :data=event></event>
       </li>
     </ul>
@@ -20,7 +20,7 @@
 <script>
   import event from './Event'
   import eventForm from './EventForm'
-  import { mapActions, mapState, mapGetters } from 'vuex'
+  import { mapActions, mapState } from 'vuex'
 
   export default{
     mounted () {
@@ -36,10 +36,10 @@
       }
     },
     computed: {
-      ...mapGetters(['getEvents']),
       ...mapState({
         userName: state => state.auth.userInfo.displayName,
-        profileImg: state => state.auth.userInfo.profileImg
+        profileImg: state => state.auth.userInfo.profileImg,
+        events: state => state.events.all
       })
     },
     components: { event, eventForm }

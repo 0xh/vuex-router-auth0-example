@@ -6,7 +6,7 @@
       <button type="button" @click.stop.prevent=addSchedule>Add Schedule</button>
       <input type="text" v-model="titleSchedule" placeholder="schedule title">
       <ul>
-        <li v-for="schedule in vm.schedule">
+        <li v-for="schedule in schedules">
           {{ schedule.title }}
         </li>
       </ul>
@@ -25,9 +25,10 @@
     data () {
       return {
         titleSchedule: '',
+        schedules: [],
         vm: {
           title: '',
-          schedule: []
+          scheduleIds: []
         }
       }
     },
@@ -35,23 +36,22 @@
       ...mapActions([ 'saveSchedule', 'saveEvent' ]),
       reset () {
         this.titleSchedule = ''
+        this.schedules = []
         this.vm.title = ''
-        this.vm.schedule = []
+        this.vm.scheduleIds = []
       },
       save () {
         let self = this
-        let scheduleRequests = Array.from(self.vm.schedule, self.saveSchedule)
+        let scheduleRequests = Array.from(self.schedules, self.saveSchedule)
         axios.all(scheduleRequests)
           .then(function (resp) {
-            self.vm.schedule = resp.map(it => it.id)
+            self.vm.scheduleIds = resp.map(it => it.id)
             self.saveEvent(self.vm)
-              .then(resp => {
-                self.reset()
-              })
+              .then(self.reset)
           });
       },
       addSchedule () {
-        this.vm.schedule.push({
+        this.schedules.push({
           title: this.titleSchedule
         })
         this.titleSchedule = ''
