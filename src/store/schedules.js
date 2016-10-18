@@ -21,7 +21,7 @@ const actions = {
   fetchSchedules ({ commit }) {
     return schedules.get('')
       .then(resp => resp.data)
-      .then(events => commit('SET_EVENTS', events))
+      .then(schedules => commit('SET_SCHEDULES', schedules))
   },
   saveSchedule({ commit }, payload) {
     return schedules.post('', payload)
@@ -34,7 +34,9 @@ const actions = {
 }
 
 const getters = {
-
+  forEvent (state, getters, rootState) {
+    return state.all
+  }
 }
 
 export default {

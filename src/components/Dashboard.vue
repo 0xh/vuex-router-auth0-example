@@ -8,26 +8,31 @@
 
     <event-form></event-form>
     <hr>
-    <ul >
-      <li v-for="event in events">
-        <event :data=event></event>
-      </li>
+    <ul v-if=!isLoading>
+      <event v-for="event in events" :data=event></event>
     </ul>
 
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   import event from './Event'
   import eventForm from './EventForm'
   import { mapActions, mapState } from 'vuex'
 
-  export default{
+  export default {
+    data () {
+      return {
+        isLoading: true
+      }
+    },
     mounted () {
-      this.fetchEvens()
+      axios.all([ this.fetchSchedules(), this.fetchEvents() ])
+        .then(() => this.isLoading = false)
     },
     methods: {
-      ...mapActions([ 'logout', 'fetchEvens' ]),
+      ...mapActions([ 'logout', 'fetchEvents', 'fetchSchedules' ]),
       logoutAndRedirect () {
         let self = this
         this.logout().then(resp => {

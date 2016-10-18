@@ -18,7 +18,7 @@ const mutations = {
 }
 
 const actions = {
-  fetchEvens ({ commit }) {
+  fetchEvents ({ commit }) {
     return events.get('')
       .then(resp => resp.data)
       .then(events => commit('SET_EVENTS', events))

@@ -5,11 +5,7 @@
     <div class="schedule">
       <button type="button" @click.stop.prevent=addSchedule>Add Schedule</button>
       <input type="text" v-model="titleSchedule" placeholder="schedule title">
-      <ul>
-        <li v-for="schedule in schedules">
-          {{ schedule.title }}
-        </li>
-      </ul>
+      <schedules :schedules=schedules></schedules>
     </div>
   </form>
 </template>
@@ -18,6 +14,7 @@
 </style>
 
 <script>
+  import schedules from './Schedules'
   import { mapActions } from 'vuex'
   import axios from 'axios'
 
@@ -56,6 +53,7 @@
         })
         this.titleSchedule = ''
       }
-    }
+    },
+    components: { schedules }
   }
 </script>
