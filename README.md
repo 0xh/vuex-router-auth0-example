@@ -12,6 +12,14 @@ Example [Stamplay App][3] with Vuex + Vue-router *(2.0)* using
  - Add [events][1] and [schedules][2] objects
  - [Configure Auth0][0] authentication
  - Clone this project
+ - Create `.env` file in root with
+ 
+```
+MY_EMAIL=<email of stamplay>
+MY_PASSWORD=<password of stamplay>
+```
+ 
+ - Install dependencies:
 
 ``` bash
 # install dependencies
