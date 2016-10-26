@@ -2,7 +2,7 @@ import axios from 'axios'
 
 var events = axios.create({
   baseURL: '/api/cobject/v1/events'
-});
+})
 
 const state = {
   all: []
@@ -23,7 +23,7 @@ const actions = {
       .then(resp => resp.data)
       .then(events => commit('SET_EVENTS', events))
   },
-  saveEvent({ commit }, payload) {
+  saveEvent ({ commit }, payload) {
     return events.post('', payload)
       .then(res => res.data)
       .then(event => {
@@ -33,8 +33,7 @@ const actions = {
   }
 }
 
-const getters = {
-}
+const getters = {}
 
 export default {
   state,

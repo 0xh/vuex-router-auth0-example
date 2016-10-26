@@ -7,7 +7,7 @@
 
 <script>
   import schedules from './Schedules'
-  import { mapGetters, mapState } from 'vuex'
+  import { mapState } from 'vuex'
   import _ from 'lodash'
 
   export default{

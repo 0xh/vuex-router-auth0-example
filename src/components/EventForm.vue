@@ -45,7 +45,7 @@
             self.vm.scheduleIds = resp.map(it => it.id)
             self.saveEvent(self.vm)
               .then(self.reset)
-          });
+          })
       },
       addSchedule () {
         this.schedules.push({

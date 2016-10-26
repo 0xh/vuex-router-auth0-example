@@ -11,7 +11,6 @@
     <ul v-if=!isLoading>
       <event v-for="event in events" :data=event></event>
     </ul>
-
   </div>
 </template>
 
@@ -29,7 +28,9 @@
     },
     mounted () {
       axios.all([ this.fetchSchedules(), this.fetchEvents() ])
-        .then(() => this.isLoading = false)
+        .then(function () {
+          this.isLoading = false
+        })
     },
     methods: {
       ...mapActions([ 'logout', 'fetchEvents', 'fetchSchedules' ]),

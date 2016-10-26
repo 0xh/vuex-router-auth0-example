@@ -4,15 +4,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
 
-  export default{
+  export default {
     methods: {
-      ...mapActions(['login'])
+      ...mapActions([ 'login' ])
     },
-    mounted(){
+    mounted () {
       let self = this
-      this.login(this.$route.query.jwt).then( () => {
+      this.login(this.$route.query.jwt).then(() => {
         self.$router.push('/dashboard')
       })
     }

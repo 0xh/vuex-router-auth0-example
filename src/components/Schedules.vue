@@ -10,12 +10,12 @@
 </style>
 
 <script>
-    export default{
-        props: {
-          schedules: {
-            type: Array,
-            require: true
-          }
-        }
+  export default{
+    props: {
+      schedules: {
+        type: Array,
+        require: true
+      }
     }
+  }
 </script>

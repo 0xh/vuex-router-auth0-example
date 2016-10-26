@@ -2,7 +2,7 @@ import axios from 'axios'
 
 var schedules = axios.create({
   baseURL: '/api/cobject/v1/schedules'
-});
+})
 
 const state = {
   all: []
@@ -23,7 +23,7 @@ const actions = {
       .then(resp => resp.data)
       .then(schedules => commit('SET_SCHEDULES', schedules))
   },
-  saveSchedule({ commit }, payload) {
+  saveSchedule ({ commit }, payload) {
     return schedules.post('', payload)
       .then(res => res.data)
       .then(schedule => {
@@ -34,7 +34,7 @@ const actions = {
 }
 
 const getters = {
-  forEvent (state, getters, rootState) {
+  forEvent (state) {
     return state.all
   }
 }

@@ -36,6 +36,7 @@ const router = new VueRouter({
   base: __dirname
 })
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
